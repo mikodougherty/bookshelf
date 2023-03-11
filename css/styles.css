@@ -1,0 +1,74 @@
+h1 {
+    font-family: 'Berkshire Swash', cursive;
+    font-size:50px;
+}
+
+ul {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Main Hero Section */
+.mainHero {
+    background-color: #F2E4D8;
+}
+
+.heroText {
+    /* width: 30%; */
+    padding: 50px 0 50px 200px;
+}
+
+/* Book Navigation */
+.bookNav {
+    padding:30px 0;
+}
+
+.bookNav ul {
+    display:flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.bookNav ul li {
+    list-style-type: none;
+}
+
+.bookNav a {
+    text-decoration:none;
+    color:black;
+}
+
+/* Book Grid */
+.bookGridContainer {
+    width: 1200px;
+    margin: 0 auto;
+    padding:50px 0;
+}
+
+.bookGrid {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.bookGridItem img {
+    max-width:200px;
+}
+
+/* Footer */
+footer {
+    background-color:#BF9169;
+    color:black;
+    text-align:center;
+    padding:5px;
+}
+
+footer p {
+    margin-bottom:0;
+}
+
+footer a {
+    color:black;
+    text-decoration: none;
+}
