@@ -19,7 +19,7 @@
         </div>
     </section>
 
-<!-- Nav Tabs -->
+<!-- Nav Tabs from Bootstrap -->
     <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="pills-all" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All</button>
@@ -30,7 +30,15 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="pills-twoTwo" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">2022</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-twoThree" data-bs-toggle="pill" data-bs-target="#pills-23" type="button" role="tab" aria-controls="pills-twoThree" aria-selected="false">2023</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" disabled>2024</button>
+          </li>
+
     </ul>
+
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
             
@@ -38,6 +46,26 @@
                 <section class="bookGrid">
                 </section>
             </div>
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
 
         </div>
 
@@ -58,9 +86,29 @@
             </div>
 
         </div>
+
+        <div class="tab-pane fade" id="pills-23" role="tabpanel" aria-labelledby="pills-23" tabindex="0">
+            
+            <div class="bookGridContainer23">
+                <section class="bookGrid23">
+                </section>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0"></div>
+
     </div>
 
 
+<section class="preFooter">
+    <div class="preFooterTextLeft">
+        <p>Since May of 2021, Miko has read:</p>
+    </div>
+    <div class="preFooterTextRight">
+        <p class="preFooterTotal"></p>
+    </div>
+
+</section>
 
 <footer>
     <p><a href="https://www.goodreads.com/user/show/136508571-miko-dougherty" target="_blank">Follow Miko on Goodreads</a></p>

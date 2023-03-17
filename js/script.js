@@ -4,15 +4,16 @@ const userID = "114186212132847518300";
 //Book List All
 async function bookList() {
 
-    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/4/volumes";  
+    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/4/volumes?maxResults=40";  
 
     const response = await fetch(theURL);
     const bookData = await response.json();
 
+    console.log(bookData);
+
     for(let i=0; i < bookData.items.length; i++){
         const bookGridItem = document.createElement("article");
         bookGridItem.classList.add("bookGridItem")
-
 
         const newBookItem = document.createElement("img");
         newBookItem.setAttribute("src", bookData.items[i].volumeInfo.imageLinks.thumbnail);
@@ -32,6 +33,9 @@ async function bookList() {
 
     const buttonAll = document.querySelector("#pills-all");
     buttonAll.innerText = "All (" + bookData.totalItems + ")";
+
+    const totalBooks = bookData.totalItems;
+    document.querySelector('.preFooterTotal').innerText = totalBooks;
 }
 bookList();
 
@@ -106,8 +110,6 @@ async function twoThreeBookList() {
     const response = await fetch(twoThreeURL);
     const twoThreeBookData = await response.json();
 
-    console.log(twoThreeBookData)
-
     for(let i=0; i < twoThreeBookData.items.length; i++){
         const bookGridItem = document.createElement("article");
         bookGridItem.classList.add("bookGridItem")
@@ -132,5 +134,16 @@ async function twoThreeBookList() {
     buttonTwoThree.innerText = "2023 (" + twoThreeBookData.totalItems + ")";
 }
 twoThreeBookList();
+
+// Extra Tab JS from Bootstrap
+const triggerTabList = document.querySelectorAll('#pills-twoThree button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
 
 
