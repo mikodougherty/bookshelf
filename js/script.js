@@ -4,7 +4,8 @@ const userID = "114186212132847518300";
 //Book List All
 async function bookList(pageNumber, shelfNumber, domTarget) {
 
-    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/" + shelfNumber + "/volumes?maxResults=40";  
+    let index = pageNumber * 40;
+    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/" + shelfNumber + "/volumes?maxResults=40&startIndex=" + index; 
 
     const response = await fetch(theURL);
     const bookData = await response.json();
@@ -12,6 +13,12 @@ async function bookList(pageNumber, shelfNumber, domTarget) {
     console.log(bookData);
 
     if("items" in bookData) {
+    document.querySelector(domTarget).innerHTML = "";
+    let removeMe = document.querySelector(domTarget).closest(".tab-pane").querySelector(".pagination");
+    if (typeof removeMe != "undefined" && removeMe != null) {
+        removeMe.remove();
+    }
+
     for(let i=0; i < bookData.items.length; i++){
         const bookGridItem = document.createElement("article");
         bookGridItem.classList.add("bookGridItem")
@@ -35,16 +42,16 @@ async function bookList(pageNumber, shelfNumber, domTarget) {
     const innerTemplate = `<ul class="pagination justify-content-center">
     </ul>`
 
-  const paginationSet = document.createElement("nav");
-  paginationSet.innerHTML = innerTemplate;
+    const paginationSet = document.createElement("nav");
+    paginationSet.innerHTML = innerTemplate;
 
-  let disabled = "disabled";
-  if(pageNumber > 0) {
-    disabled = "";
-  }
+    let disabled = "disabled";
+    if(pageNumber > 0) {
+        disabled = "";
+    }
 
   paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${disabled}">
-  <a class="page-link" href="#" aria-label="Previous">
+  <a class="page-link pagPre" href="#" aria-label="Previous">
     <span aria-hidden="true">&laquo;</span>
   </a>
     </li>`;
@@ -57,7 +64,7 @@ async function bookList(pageNumber, shelfNumber, domTarget) {
         active = "";
     }
     let shownPageNumber = i+1;
-    paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${active}"><a class="page-link" href="#">${shownPageNumber}</a></li>`
+    paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${active} pagNum"><a class="page-link" href="#">${shownPageNumber}</a></li>`
   }
 
   disabled = "disabled";
@@ -66,12 +73,49 @@ async function bookList(pageNumber, shelfNumber, domTarget) {
   }
 
   paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${disabled}">
-  <a class="page-link" href="#" aria-label="Next">
+  <a class="page-link pagNex" href="#" aria-label="Next">
     <span aria-hidden="true">&raquo;</span>
   </a>
     </li>`
 
   let targetTab = document.querySelector(domTarget).closest(".tab-pane").append(paginationSet);
+
+  // click on pre - 1 from current page
+  document.querySelector(domTarget).closest(".tab-pane").querySelector(".pagPre").addEventListener('click', function(e){
+    e.preventDefault();
+    
+    const targetPageNumber = pageNumber - 1;
+    bookList(targetPageNumber, shelfNumber, domTarget);
+
+  });
+
+  document.querySelector(domTarget).closest(".tab-pane").querySelector(".pagNex").addEventListener('click', function(e){
+    e.preventDefault();
+    
+    const targetPageNumber = pageNumber + 1;
+    bookList(targetPageNumber, shelfNumber, domTarget);
+
+  });
+
+  // if not disabled
+  //call booklist function
+  // for each page number
+    //when click page number  
+  
+  let pageNumberSet = document.querySelector(domTarget).closest(".tab-pane").querySelectorAll(".pagNum");
+  for (i=0; i < pageNumberSet.length; i++){
+    pageNumberSet[i].querySelector("a").addEventListener('click', function(e){
+        e.preventDefault();
+        const targetPageNumber = parseInt(this.innerText)-1;
+        bookList(targetPageNumber, shelfNumber, domTarget);
+
+    });
+  }
+        //get page number
+        //call bookList with param
+  //when clicked next btn +1
+  //if not disabled
+    //call bookList  
 
     
 
@@ -79,6 +123,7 @@ async function bookList(pageNumber, shelfNumber, domTarget) {
 }
     return 0;
 }
+
 async function getAllBooks(){
     let tabTitle = "";
     tabTitle = await bookList(0, 4, ".bookGrid");
