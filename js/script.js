@@ -2,15 +2,16 @@ const apiKey = "AIzaSyB9jQH0ik-hHrTbOiX4JYV3t1LLUxcgyug";
 const userID = "114186212132847518300";
 
 //Book List All
-async function bookList() {
+async function bookList(pageNumber, shelfNumber, domTarget) {
 
-    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/4/volumes?maxResults=40";  
+    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/" + shelfNumber + "/volumes?maxResults=40";  
 
     const response = await fetch(theURL);
     const bookData = await response.json();
 
     console.log(bookData);
 
+    if("items" in bookData) {
     for(let i=0; i < bookData.items.length; i++){
         const bookGridItem = document.createElement("article");
         bookGridItem.classList.add("bookGridItem")
@@ -28,20 +29,77 @@ async function bookList() {
         bookAuthor.innerText = bookData.items[i].volumeInfo.authors[0];
         bookGridItem.append(bookAuthor)
  
-        document.querySelector(".bookGrid").append(bookGridItem);
+        document.querySelector(domTarget).append(bookGridItem);
     }
 
-    const buttonAll = document.querySelector("#pills-all");
-    buttonAll.innerText = "All (" + bookData.totalItems + ")";
+    const innerTemplate = `<ul class="pagination justify-content-center">
+    </ul>`
 
-    const totalBooks = bookData.totalItems;
-    document.querySelector('.preFooterTotal').innerText = totalBooks;
+  const paginationSet = document.createElement("nav");
+  paginationSet.innerHTML = innerTemplate;
+
+  let disabled = "disabled";
+  if(pageNumber > 0) {
+    disabled = "";
+  }
+
+  paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${disabled}">
+  <a class="page-link" href="#" aria-label="Previous">
+    <span aria-hidden="true">&laquo;</span>
+  </a>
+    </li>`;
+
+  const pageCount = Math.ceil(bookData.totalItems/40)
+
+  for (i=0; i < pageCount; i++){
+    let active = "active";
+    if (pageNumber != i) {
+        active = "";
+    }
+    let shownPageNumber = i+1;
+    paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${active}"><a class="page-link" href="#">${shownPageNumber}</a></li>`
+  }
+
+  disabled = "disabled";
+  if (pageNumber < pageCount-1) {
+    disabled = "";
+  }
+
+  paginationSet.querySelector("ul").innerHTML += `<li class="page-item ${disabled}">
+  <a class="page-link" href="#" aria-label="Next">
+    <span aria-hidden="true">&raquo;</span>
+  </a>
+    </li>`
+
+  let targetTab = document.querySelector(domTarget).closest(".tab-pane").append(paginationSet);
+
+    
+
+    return bookData.totalItems;
 }
-bookList();
+    return 0;
+}
+async function getAllBooks(){
+    let tabTitle = "";
+    tabTitle = await bookList(0, 4, ".bookGrid");
+    document.querySelector("#pills-all").innerText = "All (" + tabTitle + ")";
+    document.querySelector('.preFooterTotal').innerText = tabTitle;
+
+    tabTitle = await bookList(0, 1001, ".bookGrid21");
+    document.querySelector("#pills-twoOne").innerText = "2021 (" + tabTitle + ")";
+
+    tabTitle = await bookList(0, 1002, ".bookGrid22");
+    document.querySelector("#pills-twoTwo").innerText = "2022 (" + tabTitle + ")";
+
+    tabTitle = await bookList(0, 1003, ".bookGrid23");
+    document.querySelector("#pills-twoThree").innerText = "2023 (" + tabTitle + ")";
+}
+
+getAllBooks();
 
 //Book List 2021
 async function twoOneBookList() {
-    let twoOneURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1001/volumes";  
+    let twoOneURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1001/volumes?maxResults=40";  
 
     const response = await fetch(twoOneURL);
     const twoOneBookData = await response.json();
@@ -69,11 +127,11 @@ async function twoOneBookList() {
     const buttonTwoOne = document.querySelector("#pills-twoOne");
     buttonTwoOne.innerText = "2021 (" + twoOneBookData.totalItems + ")";
 }
-twoOneBookList();
+// twoOneBookList();
 
 //Book List 2022
 async function twoTwoBookList() {
-    let twoTwoURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1002/volumes";  
+    let twoTwoURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1002/volumes?maxResults=40";  
 
     const response = await fetch(twoTwoURL);
     const twoTwoBookData = await response.json();
@@ -101,11 +159,11 @@ async function twoTwoBookList() {
     const buttonTwoTwo = document.querySelector("#pills-twoTwo");
     buttonTwoTwo.innerText = "2022 (" + twoTwoBookData.totalItems + ")";
 }
-twoTwoBookList();
+// twoTwoBookList();
 
 //Book List 2023
 async function twoThreeBookList() {
-    let twoThreeURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1003/volumes";  
+    let twoThreeURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/1003/volumes?maxResults=40";  
 
     const response = await fetch(twoThreeURL);
     const twoThreeBookData = await response.json();
@@ -133,7 +191,7 @@ async function twoThreeBookList() {
     const buttonTwoThree = document.querySelector("#pills-twoThree");
     buttonTwoThree.innerText = "2023 (" + twoThreeBookData.totalItems + ")";
 }
-twoThreeBookList();
+// twoThreeBookList();
 
 // Extra Tab JS from Bootstrap
 const triggerTabList = document.querySelectorAll('#pills-twoThree button')
