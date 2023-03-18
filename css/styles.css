@@ -1,7 +1,4 @@
-h1 {
-    font-family: 'Berkshire Swash', cursive;
-    font-size:50px;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
 ul {
     margin: 0;
@@ -10,12 +7,22 @@ ul {
 
 /* Main Hero Section */
 .mainHero {
-    background-color: #F2E4D8;
+    background-image: url("../images/Bookshelf-Hero.jpg");
+    background-position: center;
+    background-size: cover;
+    height:500px;
+    display: flex;
+    align-items: center;
 }
 
 .heroText {
-    /* width: 30%; */
     padding: 50px 0 50px 200px;
+}
+
+.heroText h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size:50px;
+    line-height: 0.8em;
 }
 
 /* Book Navigation */
@@ -27,6 +34,12 @@ ul {
 .bookGridContainer, .bookGridContainer21, .bookGridContainer22, .bookGridContainer23 {
     margin: 0 auto;
     padding:50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .bookGridContainer, .bookGridContainer21, .bookGridContainer22, .bookGridContainer23 {
+        padding:50px 25px;
+    }
 }
 
 .bookGrid, .bookGrid21, .bookGrid22, .bookGrid23 {
@@ -55,6 +68,10 @@ article.bookGridItem {
     width: min-content;
 }
 
+/* Pagination */
+.pagination {
+    margin-bottom: 50px;
+}
 
 /* Pre Footer */
 .preFooter {
