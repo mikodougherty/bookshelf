@@ -5,7 +5,7 @@ const userID = "114186212132847518300";
 async function bookList(pageNumber, shelfNumber, domTarget) {
 
     let index = pageNumber * 40;
-    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/" + shelfNumber + "/volumes?maxResults=40&startIndex=" + index; 
+    let theURL = "https://www.googleapis.com/books/v1/users/" + userID + "/bookshelves/" + shelfNumber + "/volumes?maxResults=40&startIndex=" + index + "&key=" + apiKey; 
 
     const response = await fetch(theURL);
     const bookData = await response.json();
@@ -116,7 +116,8 @@ async function getAllBooks(){
     let tabTitle = "";
     tabTitle = await bookList(0, 4, ".bookGrid");
     document.querySelector("#pills-all").innerText = "All (" + tabTitle + ")";
-    document.querySelector('.preFooterTotal').innerText = tabTitle;
+    document.querySelector('.preFooterText').innerText = "Total Book Count: " + tabTitle;
+    document.querySelector(".paraNum").innerText = tabTitle;
 
     tabTitle = await bookList(0, 1001, ".bookGrid21");
     document.querySelector("#pills-twoOne").innerText = "2021 (" + tabTitle + ")";
@@ -126,6 +127,8 @@ async function getAllBooks(){
 
     tabTitle = await bookList(0, 1003, ".bookGrid23");
     document.querySelector("#pills-twoThree").innerText = "2023 (" + tabTitle + ")";
+
+
 }
 getAllBooks();
 
