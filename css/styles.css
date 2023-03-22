@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
+body {
+    border: 10px solid white;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -10,10 +14,30 @@ ul {
     background-image: url("../images/Bookshelf-Hero.jpg");
     background-position: center;
     background-size: cover;
-    height:500px;
+    padding: 70px 0;
     display: flex;
     align-items: center;
 }
+
+@media only screen and (max-width: 600px) { 
+    .mainHero {
+        background-color: #F2E4D8;
+        background-image:none;
+        display:block;
+        padding: 50px 0 0 0;
+    }
+    .Hero_Image_MobileShow {
+        background-image: url("../images/Bookshelf_Image_Mobile.jpg");
+        background-position: center;
+        background-size: cover;
+        height:250px;
+    }
+}    
+
+@media only screen and (max-width: 1300px) { 
+}
+
+
 
 .heroText {
     padding: 50px 0 50px 200px;
@@ -25,32 +49,135 @@ ul {
     line-height: 0.8em;
 }
 
+.heroText p {
+    width: 420px;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) { 
+    .heroText {
+        padding:20px;
+    }
+
+    .heroText h1, .heroText p {
+        text-align:center;
+}
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 801px) { 
+    .heroText {
+        padding:0 100px;
+    }
+}
+
+
+.fa-solid, .fas {
+    font-size: 14px;
+}
+
+
+/* buttons */
+.btn-primary {
+    background-color: #97B5A4;
+    border-color: #97B5A4;
+    padding: 5px 30px;
+    margin-top: 10px;
+}
+
+.btn-primary:hover, .btn-primary:active  {
+    background-color: #789E87;
+    border-color: #789E87;
+}
+
+.btn:focus-visible  {
+    background-color: #789E87;
+    border-color: #789E87;
+}
+
+.btn:active  {
+    background-color: #789E87 !important;
+    border-color: #789E87 !important;
+}
+
+.nav-pills .nav-link.active{
+    background-color: #e66c6c;
+}
+
+.nav-link {
+    color: #e66c6c;
+}
+
+.nav-link:hover {
+    color: #7c4848;
+}
+
+@media only screen and (max-width: 600px) { 
+    .btn-primary {
+        margin: 0 auto;
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Pagination */
+.pagination {
+    margin-bottom: 50px;
+}
+
+.active>.page-link {
+    background-color: #7c4848;
+    border-color:#7c4848;
+}
+
+.page-link {
+    color:#7c4848;
+}
+
+.page-link:hover {
+    color:#D9C7B8;
+}
+
+.page-link:focus {
+    color:#7c4848;
+}
+
+
 /* Book Navigation */
 .mb-3 {
     margin-top: 50px;
 }
 
 /* Book Grid */
-.bookGridContainer, .bookGridContainer21, .bookGridContainer22, .bookGridContainer23 {
+.bookGridContainer, 
+.bookGridContainer21, 
+.bookGridContainer22, 
+.bookGridContainer23 {
     margin: 0 auto;
     padding:50px;
 }
 
 @media only screen and (max-width: 600px) {
-    .bookGridContainer, .bookGridContainer21, .bookGridContainer22, .bookGridContainer23 {
+    .bookGridContainer, 
+    .bookGridContainer21, 
+    .bookGridContainer22, 
+    .bookGridContainer23 {
         padding:50px 25px;
     }
 }
 
-.bookGrid, .bookGrid21, .bookGrid22, .bookGrid23 {
+.bookGrid, 
+.bookGrid21, 
+.bookGrid22, 
+.bookGrid23 {
     display:flex;
     flex-wrap:wrap;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
 }
 
 .bookGridItem img {
     max-height:180px;
+    box-shadow: 4px 6px 5px lightgray;
 }
 
 .bookGridItem h1 {
@@ -68,25 +195,25 @@ article.bookGridItem {
     width: min-content;
 }
 
-/* Pagination */
-.pagination {
-    margin-bottom: 50px;
-}
+
 
 /* Pre Footer */
 .preFooter {
-    background-color:#D9C7B8;
-    padding:50px;
+    background-color:#f2e4d8;
+    padding:25px;
 }
 
-.preFooterTextRight {
-    font-size:50px;
-    font-weight:bold;
+h1.preFooterText {
+    font-family: 'DM Serif Display', serif;
+    font-size:40px;
+    line-height: 1em;
+    text-align: center;
+    margin-bottom:0;
 }
 
 /* Footer */
 footer {
-    background-color:#BF9169;
+    background-color:#D9C7B8;
     color:black;
     text-align:center;
     padding:5px;
