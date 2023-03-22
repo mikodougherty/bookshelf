@@ -9,6 +9,10 @@ ul {
     padding: 0;
 }
 
+.mainContainer {
+    max-width:100%;
+}
+
 /* Main Hero Section */
 .mainHero {
     background-image: url("../images/Bookshelf-Hero.jpg");
@@ -61,6 +65,7 @@ ul {
 
     .heroText h1, .heroText p {
         text-align:center;
+        width:100%;
 }
 }
 
